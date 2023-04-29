@@ -24,10 +24,51 @@ const sortingHat = () => {
     renderToDom("#sortingHat", domString);
   };
 
-  sortingHat();
+  const buttonControl = () => {
+      document.querySelector('body').addEventListener('click', buttonActions);
+  };
+
+  const buildForm = () => {
+    let domString = `
+    <form id="studentNameForm">
+    <div class="mb-3">
+      <label for="studentName" class="form-label">Student Name</label>
+      <input type="text" placeholder="Enter your name here." class="form-control" id="studentName">
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+    </form>
+    `;
+
+   renderToDom("#studentForm", domString);
+  }
+
+
+  const buttonActions = (event) => {
+
+    switch (event) {
+        case event.target.id === "startButton":
+            console.log('Shits getting clicked, yo!');
+            buildForm();
+            break;
+    
+        default:
+            break;
+    }
+    // if (event.target.id === "startButton") {
+    //     console.log('Shits getting clicked, yo!');
+    //     buildForm();
+    // }
+};
 
 const sortStudents = () => {};
 
 const expelStudents = () => {};
 
 const addStudent = () => {};
+
+const init = () => {
+    sortingHat();
+    buttonControl();
+}
+
+init();
