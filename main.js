@@ -56,15 +56,66 @@ const sortingHat = () => {
     }
 };
 
-const addStudent = (student) => {
-    newStudents.push(student)
-    sortStudents();
+const addStudent = (studentName) => {
+    const newStudent = {
+        name: studentName,
+        house:  sortStudent(),
+    }
+    newStudents.push(newStudent)
+    placeStudents();
 };
 
-const sortStudents = () => {
+const randomNumber = () => {
+    return Math.floor(Math.random() * 4) + 1;
+};
+
+
+
+const sortStudent = () => {
+    const random = randomNumber();
+    let studentHouse = '';
+    switch (random) {
+        case 1:
+            studentHouse = "Griffyndor";
+            break;
+        case 2:
+            studentHouse = "HufflePuff";
+            break;
+        case 3:
+            studentHouse = "Ravenclaw";
+            break;
+        case 4:
+            studentHouse = "Slytherin";
+            break;
+    }
+    return studentHouse;
+}
+
+const getCrest = (studentHouse) => {
+    let crest = "";
+    switch (studentHouse) {
+        case studentHouse = "Griffyndor":
+            crest = `https://static.wikia.nocookie.net/pottermore/images/1/16/Gryffindor_crest.png`;
+            break;
+        case studentHouse = "HufflePuff":
+            crest = `https://static.wikia.nocookie.net/pottermore/images/5/5e/Hufflepuff_crest.png`;
+            break;
+        case studentHouse = "Ravenclaw":
+            crest = `https://static.wikia.nocookie.net/pottermore/images/4/4f/Ravenclaw_crest.png`;
+            break;
+        case studentHouse = "Slytherin":
+crest = `https://static.wikia.nocookie.net/pottermore/images/4/45/Slytherin_Crest.png`;
+            break;
+    }
+    return crest;
+}
+
+
+
+const placeStudents = () => {
     let domString = ''
     for (student of newStudents) {
-        domString += `<p>${student}</p>`
+        domString += `<p>${student.name}</p> <img src="${getCrest(student.house)}" alt="${student.house}"/> <p class="${student.house.toLowerCase()}">${student.house}</p>`
     }
     renderToDom('#hogwartsStudents', domString);
 }
@@ -75,6 +126,7 @@ const expelStudents = () => {};
 const init = () => {
     sortingHat();
     buttonControl();
+    sortStudent();
 }
 
 init();
