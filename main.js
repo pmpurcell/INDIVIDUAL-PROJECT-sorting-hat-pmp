@@ -52,8 +52,34 @@ const sortingHat = () => {
         event.preventDefault();
         console.log('submit');
         console.log(document.getElementById('studentName').value);
-        addStudent(document.getElementById('studentName').value);
+        handleSubmit(document.getElementById('studentName').value);
     }
+};
+
+const handleSubmit = (studentName) => {
+if (studentName === "") {
+    showHowler();
+} else {
+    addStudent(studentName);
+    document.querySelector("form").reset();
+}
+}
+
+const showHowler = () => {
+    let domString = `
+  <div class="howler">
+  <img src="https://static.wikia.nocookie.net/harrypotter/images/e/e4/Howler.png" alt-text="howler">
+  <h6>"You must enter your name!"</h6>
+  </div>
+  `;
+    renderToDom("#howlerDiv", domString);
+
+    const clearHowler = () => {
+        let domString = ` `;
+        renderToDom("#howlerDiv", domString);
+      };
+      
+    setTimeout(clearHowler, 3 * 1000);
 };
 
 const addStudent = (studentName) => {
