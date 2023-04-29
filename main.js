@@ -24,10 +24,57 @@ const sortingHat = () => {
     renderToDom("#sortingHat", domString);
   };
 
-  sortingHat();
+  const buttonControl = () => {
+      document.querySelector('body').addEventListener('click', buttonActions);
+  };
 
-const sortStudents = () => {};
+  const buildForm = () => {
+    let domString = `
+    <form id="studentNameForm">
+    <div class="mb-3">
+      <label for="studentName" class="form-label">Student Name</label>
+      <input type="text" placeholder="Enter your name here." class="form-control" id="studentName">
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+    </form>
+    `;
+
+   renderToDom("#studentForm", domString);
+  }
+
+
+  const buttonActions = (event) => {
+    if (event.target.id === "startButton") {
+        console.log('Shits getting clicked, yo!');
+        buildForm();
+    }
+    if (event.target.id === 'submitButton') {
+        event.preventDefault();
+        console.log('submit');
+        console.log(document.getElementById('studentName').value);
+        addStudent(document.getElementById('studentName').value);
+    }
+};
+
+const addStudent = (student) => {
+    newStudents.push(student)
+    sortStudents();
+};
+
+const sortStudents = () => {
+    let domString = ''
+    for (student of newStudents) {
+        domString += `<p>${student}</p>`
+    }
+    renderToDom('#hogwartsStudents', domString);
+}
 
 const expelStudents = () => {};
 
-const addStudent = () => {};
+
+const init = () => {
+    sortingHat();
+    buttonControl();
+}
+
+init();
