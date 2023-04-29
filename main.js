@@ -44,27 +44,33 @@ const sortingHat = () => {
 
 
   const buttonActions = (event) => {
-
-    switch (event) {
-        case event.target.id === "startButton":
-            console.log('Shits getting clicked, yo!');
-            buildForm();
-            break;
-    
-        default:
-            break;
+    if (event.target.id === "startButton") {
+        console.log('Shits getting clicked, yo!');
+        buildForm();
     }
-    // if (event.target.id === "startButton") {
-    //     console.log('Shits getting clicked, yo!');
-    //     buildForm();
-    // }
+    if (event.target.id === 'submitButton') {
+        event.preventDefault();
+        console.log('submit');
+        console.log(document.getElementById('studentName').value);
+        addStudent(document.getElementById('studentName').value);
+    }
 };
 
-const sortStudents = () => {};
+const addStudent = (student) => {
+    newStudents.push(student)
+    sortStudents();
+};
+
+const sortStudents = () => {
+    let domString = ''
+    for (student of newStudents) {
+        domString += `<p>${student}</p>`
+    }
+    renderToDom('#hogwartsStudents', domString);
+}
 
 const expelStudents = () => {};
 
-const addStudent = () => {};
 
 const init = () => {
     sortingHat();
