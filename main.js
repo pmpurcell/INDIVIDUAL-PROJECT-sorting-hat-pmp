@@ -1,6 +1,6 @@
 // Student Arrays
 
-const newStudents = [];
+const allStudents = [];
 
 const deathEaters = [];
 
@@ -12,7 +12,8 @@ const renderToDom = (containerId, textToRender) => {
 };
 
 const sortingHat = () => {
-  let domString = `<div class="card" style="width: 18rem;">
+  let domString = `
+  <div class="card" style="width: 18rem;">
       <img src="https://w7w5t4b3.rocketcdn.me/wp-content/uploads/2018/07/sorting-hat-quiz.jpg" class="card-img-top" alt="hat">
       <div class="card-body">
         <h5 class="card-title">Welcome to Hogwarts</h5>
@@ -22,6 +23,17 @@ const sortingHat = () => {
     </div>`;
 
   renderToDom("#sortingHat", domString);
+};
+const buttonRow = () => {
+  let domString = `
+  <button class="filter-button" id="allStudents">All Students<button>
+  <button class="filter-button" id="gryffindor">Gryffindor<button>
+  <button class="filter-button" id="hufflepuff">Hufflepuff<button>
+  <button class="filter-button" id="ravenclaw">Ravenclaw<button>
+  <button class="filter-button" id="slytherin">Slytherin<button>
+  `;
+
+  renderToDom("#buttonRow", domString);
 };
 
 const buttonControl = () => {
@@ -46,6 +58,12 @@ const buttonActions = (event) => {
   if (event.target.id === "startButton") {
     console.log("Shits getting clicked, yo!");
     buildForm();
+  }
+  if (event.target.classList.contains("filter-button")) {
+    filterStudents(event.target.id);
+  }
+  if (event.target.id === "allStudents") {
+    placeStudents(allStudents);
   }
   if (event.target.id === "submitButton") {
     event.preventDefault();
@@ -86,12 +104,12 @@ const showHowler = () => {
 
 const addStudent = (studentName) => {
   const newStudent = {
-    id: newStudents.length + 1,
+    id: allStudents.length + 1,
     name: studentName,
     house: sortStudent(),
   };
-  newStudents.push(newStudent);
-  placeStudents();
+  allStudents.push(newStudent);
+  placeStudents(allStudents);
 };
 
 const randomNumber = () => {
@@ -103,7 +121,7 @@ const sortStudent = () => {
   let studentHouse = "";
   switch (random) {
     case 1:
-      studentHouse = "Griffyndor";
+      studentHouse = "Gryffindor";
       break;
     case 2:
       studentHouse = "HufflePuff";
@@ -121,7 +139,7 @@ const sortStudent = () => {
 const getCrest = (studentHouse) => {
   let crest = "";
   switch (studentHouse) {
-    case (studentHouse = "Griffyndor"):
+    case (studentHouse = "Gryffindor"):
       crest = `https://static.wikia.nocookie.net/pottermore/images/1/16/Gryffindor_crest.png`;
       break;
     case (studentHouse = "HufflePuff"):
@@ -137,9 +155,9 @@ const getCrest = (studentHouse) => {
   return crest;
 };
 
-const placeStudents = () => {
+const placeStudents = (array) => {
   let domString = "";
-  for (student of newStudents) {
+  for (student of array) {
     domString += `        
     <div class="card ${student.house.toLowerCase()}" style="width: 18rem;">
         <img src="${getCrest(student.house)}" class="card-img-top" alt="${student.house}">
@@ -178,17 +196,32 @@ const expelStudents = (event) => {
     if (targetType === "button") {
       event.preventDefault();
   
-      const expelledStudent = newStudents.splice(newStudents.find((student) => student.id === targetId), 1);
+      const expelledStudent = allStudents.splice(allStudents.find((student) => student.id === targetId), 1);
   
       deathEaters.push(expelledStudent[0]);
   
       placeDeathEaters(deathEaters);
-      placeStudents(newStudents);
+      placeStudents(allStudents);
     }; 
+};
+
+const filterStudents = (house) => {
+    console.log(house);
+    // let filteredStudents = [];
+    // newStudents.map(
+    //     student =>
+    //         filteredStudents.push(newStudents.filter(student => student.house.toLowerCase() === house))
+    // );
+    let filterStudents = allStudents.filter(student => student.house.toLowerCase() === house);
+    console.log(filterStudents);
+
+    placeStudents(filterStudents);
+    return true;
 };
 
 const init = () => {
   sortingHat();
+  buttonRow();
   buttonControl();
   sortStudent();
 };
