@@ -1,15 +1,108 @@
+body {
+    background-image: url("https://static1.srcdn.com/wordpress/wp-content/uploads/2019/12/great-hall-feature.jpeg");
+}
+
 .gryffindor {
-    color: red;
+    background-color: red;
+    color: goldenrod;
 }
 
 .hufflepuff {
-color: goldenrod;
+    background-color: goldenrod;
+    color: black
 }
 
 .ravenclaw {
-    color: blue;
+    background-color: blue;
+    color: white
 }
 
 .slytherin {
-    color: green;
+    background-color: green;
+    color: silver;
+}
+
+#app {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#sortingHat {
+    height: 350px;
+}
+
+.candle-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.candle {
+    height: 100px;
+}
+
+@keyframes float-up {
+    0% { transform: translate(0,  0px); }
+    25%  { transform: translate(0, 15px); }
+    50%   { transform: translate(0, -0px); }   
+    75%  { transform: translate(0, -15px); }
+    100%   { transform: translate(0, 0px); }   
+  }
+
+@keyframes float-down {
+    0% { transform: translate(0,  0px); }
+    25%  { transform: translate(0,-15px); }
+    50%   { transform: translate(0, 0px); }   
+    75%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }   
+  }
+
+.go-up-first {
+    animation-name: float-up;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    
+}
+.go-down-first {
+    animation-name: float-down;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#buttonRow {
+    margin-top: 30px;
+}
+
+#cards {
+    display: flex;
+    flex-direction: row;
+}
+
+#formDiv {
+    display: flex;
+    flex-direction: row;
+    max-height: 150px;
+    margin: 30px;
+}
+
+#howlerImage {
+    height: 150px;
+}
+
+#hogwartsStudents {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#expelledStudents {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
