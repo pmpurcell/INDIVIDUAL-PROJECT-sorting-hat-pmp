@@ -88,7 +88,7 @@ const handleSubmit = (studentName) => {
 const showHowler = () => {
   let domString = `
   <div class="howler">
-  <img src="https://static.wikia.nocookie.net/harrypotter/images/e/e4/Howler.png" alt-text="howler">
+  <img id="howlerImage" src="https://static.wikia.nocookie.net/harrypotter/images/e/e4/Howler.png" alt-text="howler">
   <h6>"You must enter your name!"</h6>
   </div>
   `;
@@ -207,11 +207,7 @@ const expelStudents = (event) => {
 
 const filterStudents = (house) => {
     console.log(house);
-    // let filteredStudents = [];
-    // newStudents.map(
-    //     student =>
-    //         filteredStudents.push(newStudents.filter(student => student.house.toLowerCase() === house))
-    // );
+
     let filterStudents = allStudents.filter(student => student.house.toLowerCase() === house);
     console.log(filterStudents);
 
